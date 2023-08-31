@@ -57,6 +57,7 @@ body {
   border: 1px solid #482673;
   font-size: 120px;
   color: #482673;
+  cursor: pointer;
 }
 
 .footer {
