@@ -20,4 +20,8 @@ const gameBoard = (function() {
   };
 })();
 
-gameBoard.renderGameBoard();
+
+function playerFactory(name, symbol) {
+  return {name, symbol};
+}
+
