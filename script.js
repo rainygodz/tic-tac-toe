@@ -35,7 +35,6 @@ const gameBoard = (function() {
 
   const addSymbol = (event, player) => {
     const cellIndex = event.target.id;
-    if (!_gameBoard[cellIndex])
     _gameBoard[cellIndex] = player.symbol;
     _renderGameBoard();
   }
@@ -59,13 +58,25 @@ const game = (function() {
   const player2 = playerFactory('Player2', "O");
   let p1Score = 0;
   let p2Score = 0;
+  let playerTurn = 1;
 
   const playRound = (event) => {
-    console.log(gameBoard.isFull());
+    const cell = event.target.textContent;
     if (gameBoard.isFull()) {
       gameBoard.resetGameBoard();
+      playerTurn = 1;
     } else {
-      gameBoard.addSymbol(event, player1);
+      if (playerTurn === 1) {
+        if (!cell) {
+          gameBoard.addSymbol(event, player1);
+          playerTurn = 2;
+        }
+      } else if (playerTurn === 2) {
+        if (!cell) {
+          gameBoard.addSymbol(event, player2);
+          playerTurn = 1;
+        }
+      }
     }
   }
 
