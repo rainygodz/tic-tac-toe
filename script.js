@@ -111,7 +111,7 @@ const game = (function() {
             || (currentGameBoard[2] === player2.symbol && currentGameBoard[4] === player2.symbol && currentGameBoard[6] === player2.symbol)
             ) {
             gameBoard.resetGameBoard();
-            player1Score.textContent = ++p2Score;
+            player2Score.textContent = ++p2Score;
             playerTurn = 1;
           } else {
             playerTurn = 1;
