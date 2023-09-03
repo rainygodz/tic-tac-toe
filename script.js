@@ -39,6 +39,10 @@ const gameBoard = (function() {
     _renderGameBoard();
   }
 
+  const getGameBoard = () => {
+    return _gameBoard;
+  }
+
   return {
     addSymbol: function(event, player) {
       addSymbol(event, player);
@@ -48,6 +52,9 @@ const gameBoard = (function() {
     },
     resetGameBoard: function() {
       resetGameBoard();
+    },
+    getGameBoard: function() {
+      return getGameBoard();
     }
   };
 })();
@@ -69,12 +76,46 @@ const game = (function() {
       if (playerTurn === 1) {
         if (!cell) {
           gameBoard.addSymbol(event, player1);
-          playerTurn = 2;
+          let currentGameBoard = gameBoard.getGameBoard();
+          console.log(gameBoard.getGameBoard());
+          if (
+            (currentGameBoard[0] === player1.symbol && currentGameBoard[1] === player1.symbol && currentGameBoard[2] === player1.symbol)
+            || (currentGameBoard[3] === player1.symbol && currentGameBoard[4] === player1.symbol && currentGameBoard[5] === player1.symbol)
+            || (currentGameBoard[6] === player1.symbol && currentGameBoard[7] === player1.symbol && currentGameBoard[8] === player1.symbol)
+            || (currentGameBoard[0] === player1.symbol && currentGameBoard[3] === player1.symbol && currentGameBoard[6] === player1.symbol)
+            || (currentGameBoard[1] === player1.symbol && currentGameBoard[4] === player1.symbol && currentGameBoard[7] === player1.symbol)
+            || (currentGameBoard[2] === player1.symbol && currentGameBoard[5] === player1.symbol && currentGameBoard[8] === player1.symbol)
+            || (currentGameBoard[0] === player1.symbol && currentGameBoard[4] === player1.symbol && currentGameBoard[8] === player1.symbol)
+            || (currentGameBoard[2] === player1.symbol && currentGameBoard[4] === player1.symbol && currentGameBoard[6] === player1.symbol)
+            ) {
+              console.log('nice');
+            gameBoard.resetGameBoard();
+            player1Score.textContent = ++p1Score;
+            playerTurn = 1;
+          } else {
+            playerTurn = 2;
+          }
         }
       } else if (playerTurn === 2) {
         if (!cell) {
           gameBoard.addSymbol(event, player2);
-          playerTurn = 1;
+          let currentGameBoard = gameBoard.getGameBoard();
+          if (
+            (currentGameBoard[0] === player2.symbol && currentGameBoard[1] === player2.symbol && currentGameBoard[2] === player2.symbol)
+            || (currentGameBoard[3] === player2.symbol && currentGameBoard[4] === player2.symbol && currentGameBoard[5] === player2.symbol)
+            || (currentGameBoard[6] === player2.symbol && currentGameBoard[7] === player2.symbol && currentGameBoard[8] === player2.symbol)
+            || (currentGameBoard[0] === player2.symbol && currentGameBoard[3] === player2.symbol && currentGameBoard[6] === player2.symbol)
+            || (currentGameBoard[1] === player2.symbol && currentGameBoard[4] === player2.symbol && currentGameBoard[7] === player2.symbol)
+            || (currentGameBoard[2] === player2.symbol && currentGameBoard[5] === player2.symbol && currentGameBoard[8] === player2.symbol)
+            || (currentGameBoard[0] === player2.symbol && currentGameBoard[4] === player2.symbol && currentGameBoard[8] === player2.symbol)
+            || (currentGameBoard[2] === player2.symbol && currentGameBoard[4] === player2.symbol && currentGameBoard[6] === player2.symbol)
+            ) {
+            gameBoard.resetGameBoard();
+            player1Score.textContent = ++p2Score;
+            playerTurn = 1;
+          } else {
+            playerTurn = 1;
+          }
         }
       }
     }
